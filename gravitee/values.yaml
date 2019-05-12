@@ -119,7 +119,7 @@ gateway:
     targetAverageUtilization: 50
   ingress:
     enabled: true
-    path: /gateway
+    path: /gateway/?(.*)
     # Used to create an Ingress record.
     hosts:
       - apim.example.com
@@ -129,6 +129,7 @@ gateway:
       nginx.ingress.kubernetes.io/enable-rewrite-log: "true"
       kubernetes.io/app-root: /gateway
       kubernetes.io/rewrite-target: /gateway
+      nginx.ingress.kubernetes.io/rewrite-target: /$1
       # ingress.kubernetes.io/configuration-snippet: "etag on;\nproxy_pass_header ETag;\nproxy_set_header if-match \"\";\n"
       # kubernetes.io/tls-acme: "true"
     #tls:
